@@ -8,8 +8,8 @@
 			android:height="400dp"/>
 
 	<gradient
-			android:endColor="#0000F0FF"
-			android:startColor="#FFFF00FF"
+			android:startColor="#FF00F0FF"
+			android:endColor="#00FF00FF"
 			android:type="radial"
 			android:gradientRadius="400"
 			/>

@@ -14,7 +14,7 @@ public class Lg {
         WARNING,
         ERROR
     };
-    private static LogLevel LOG_LEVEL = LogLevel.DEBUG;
+    private static LogLevel LOG_LEVEL = LogLevel.WARNING;
 
     public static boolean isVerbose() {
         if (LOG_LEVEL == LogLevel.VERBOSE)

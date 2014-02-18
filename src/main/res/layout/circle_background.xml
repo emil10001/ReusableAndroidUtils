@@ -25,8 +25,6 @@
 			android:layout_alignParentStart="true"
 			android:layout_marginBottom="36dp"/>
 
-
-
 	<ImageView android:layout_height="40dp"
 			   android:layout_width="40dp"
 			   android:src="@drawable/pink_circle"
@@ -40,14 +38,6 @@
 			   android:id="@+id/imageView11"
 			   android:layout_alignParentBottom="true"
 			   android:layout_centerHorizontal="true"/>
-	<ImageView
-			android:layout_height="300dp"
-			android:layout_width="300dp"
-			android:src="@drawable/purple_circle_fade_inverted"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			android:layout_marginRight="-80dp"/>
-
 	<ImageView
 			android:layout_height="240dp"
 			android:layout_width="240dp"
@@ -106,5 +96,13 @@
 			android:layout_alignBottom="@+id/imageView4"
 			android:layout_alignRight="@+id/imageView5"
 			android:layout_alignEnd="@+id/imageView5"/>
+	<ImageView
+			android:layout_height="400dp"
+			android:layout_width="400dp"
+			android:src="@drawable/purple_circle_fade_inverted"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:layout_marginRight="-180dp"/>
+
 
 </RelativeLayout>
