@@ -16,7 +16,7 @@ public class GifWebView extends WebView {
         super(context);
         try {
             String gifFile = Uri.fromFile(new File(gifFilename)).toString();
-            String htmlContent = String.format("<html><body><img src=\"%s\" width=\"%s\" height=\"%s\"></body></html>",
+            String htmlContent = String.format("<html><body style=\"background-color:#000;\"><img src=\"%s\" width=\"%s\" height=\"%s\"></body></html>",
                     new String[]{gifFile, width, height });
             // use loadDataWithBaseURL so that we don't have any trouble with origins
             // https://developer.android.com/reference/android/webkit/WebView.html#loadDataWithBaseURL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
