@@ -25,6 +25,10 @@ public class SimpleFileUtils {
         return new File(sdDir, "FeigdevUtils");
     }
 
+    public static String getSdDir() {
+        return Environment.getExternalStorageDirectory().toString();
+    }
+
     public static String write(String filename, byte[] data) {
         File pictureFile = new File(filename);
 
