@@ -43,6 +43,7 @@ public class ImageTools {
     public static byte[] generateGIF(ArrayList<Bitmap> bitmaps) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        encoder.setRepeat(0);
         encoder.setDelay(250);
         encoder.start(bos);
         for (Bitmap bitmap : bitmaps) {
