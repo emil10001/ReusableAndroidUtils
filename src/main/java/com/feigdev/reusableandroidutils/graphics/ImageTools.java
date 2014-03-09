@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils;
+package com.feigdev.reusableandroidutils.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,7 +74,7 @@ public class ImageTools {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 4;
-            bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
+            bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
             Log.d(TAG, "generated image");
         } catch (OutOfMemoryError e) {
             Log.w(TAG, "getPic OutOfMemoryError =(");
