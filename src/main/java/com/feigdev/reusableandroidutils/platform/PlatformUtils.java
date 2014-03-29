@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils;
+package com.feigdev.reusableandroidutils.platform;
 
 import android.os.Build;
 

@@ -1,14 +1,18 @@
 package com.feigdev.reusableandroidutils.graphics;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.util.Log;
 import com.nbadal.gifencoder.AnimatedGifEncoder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -54,6 +58,9 @@ public class ImageTools {
     }
 
     public static Bitmap generatePic(String filename) {
+        if (null == filename)
+            return null;
+
         Bitmap bmp = null;
         try {
             bmp = BitmapFactory.decodeFile(filename);
@@ -116,13 +123,37 @@ public class ImageTools {
     }
 
     public static byte[] bitmapToByteArray(Bitmap bmp){
+        if (null == bmp)
+            return null;
+
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
 
+    public static byte[] getImageBytesFromFile(String filename) {
+        return bitmapToByteArray(generatePic(filename));
+    }
+
     public static int getBitmapSize(Bitmap data) {
         return data.getByteCount();
     }
+
+    // https://groups.google.com/forum/#!msg/android-developers/JwZG-Tchlog/iaLxLqeGEnQJ
+    public static Bitmap getBitmapFromUri(Context context, Uri streamUri){
+        if (streamUri != null) {
+            ContentResolver cr = context.getContentResolver();
+            InputStream is;
+
+            try {
+                is = cr.openInputStream(streamUri);
+                return BitmapFactory.decodeStream(is);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 }

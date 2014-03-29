@@ -3,7 +3,7 @@ package com.feigdev.reusableandroidutils.graphics;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.util.Log;
-import com.feigdev.reusableandroidutils.SimpleFileUtils;
+import com.feigdev.reusableandroidutils.files.SimpleFileUtils;
 
 /**
  * http://www.vogella.com/tutorials/AndroidCamera/article.html
