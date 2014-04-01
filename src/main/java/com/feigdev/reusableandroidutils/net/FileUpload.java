@@ -37,7 +37,12 @@ public class FileUpload {
 
         Log.d(TAG, "response: " + response.getStatusLine());
         HttpEntity responseEntity = response.getEntity();
-        Log.d(TAG, "" + Get.convertStreamToString(responseEntity.getContent()));
+
+        if (null != responseEntity)
+            Log.d(TAG, "" + Get.convertStreamToString(responseEntity.getContent()));
+
+        if (null == response.getStatusLine())
+            return 0;
 
         return response.getStatusLine().getStatusCode();
     }
