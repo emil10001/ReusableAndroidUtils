@@ -16,7 +16,7 @@ import java.io.IOException;
 public class FileUpload {
     private static String TAG = "FileUpload";
 
-    public static String putFile(String url, byte[] bytes) throws IOException{
+    public static int putFile(String url, byte[] bytes) throws IOException{
         DefaultHttpClient httpclient = new DefaultHttpClient();
 
         HttpPut httpPut = new HttpPut(url);
@@ -33,13 +33,13 @@ public class FileUpload {
         HttpResponse response = httpclient.execute(httpPut);
 
         if (null == response)
-            return null;
+            return 0;
 
         Log.d(TAG, "response: " + response.getStatusLine());
         HttpEntity responseEntity = response.getEntity();
         Log.d(TAG, "" + Get.convertStreamToString(responseEntity.getContent()));
 
-        return response.toString();
+        return response.getStatusLine().getStatusCode();
     }
 
 }

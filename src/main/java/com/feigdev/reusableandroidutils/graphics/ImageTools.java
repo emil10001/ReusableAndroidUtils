@@ -21,9 +21,12 @@ import java.util.ArrayList;
 public class ImageTools {
     private static final String TAG = "ImageTools";
 
-    public static void makeGif(ArrayList<String> listOfFiles, String outGif){
+    public static void makeGif(ArrayList<String> listOfFiles, String outGif) {
+        if (null == listOfFiles || null == outGif)
+            return;
+
         ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
-        for (String filename : listOfFiles){
+        for (String filename : listOfFiles) {
             File f = new File(filename);
             if (!f.exists())
                 continue;
@@ -34,17 +37,20 @@ public class ImageTools {
         if (null == bytes)
             return;
 
-        try{
+        try {
             FileOutputStream outStream = new FileOutputStream(outGif);
             outStream.write(bytes);
             outStream.close();
             Log.d(TAG, "wrote file " + outGif);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static byte[] generateGIF(ArrayList<Bitmap> bitmaps) {
+        if (null == bitmaps)
+            return null;
+
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.setRepeat(0);
@@ -77,6 +83,9 @@ public class ImageTools {
     }
 
     public static Bitmap shrinkBitmap(byte[] data) {
+        if (null == data)
+            return null;
+
         Bitmap bmp = null;
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -122,14 +131,28 @@ public class ImageTools {
         return bmp;
     }
 
-    public static byte[] bitmapToByteArray(Bitmap bmp){
+    public static Bitmap shrinkBitmap(Bitmap bmp) {
+        return shrinkBitmap(bitmapToByteArray(bmp));
+    }
+
+    public static byte[] shrinkBitmapToBytes(Bitmap bmp) {
+        return bitmapToByteArray(shrinkBitmap(bmp));
+    }
+
+    public static byte[] bitmapToByteArray(Bitmap bmp) {
         if (null == bmp)
             return null;
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
+        try {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            return byteArray;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static byte[] getImageBytesFromFile(String filename) {
@@ -141,18 +164,20 @@ public class ImageTools {
     }
 
     // https://groups.google.com/forum/#!msg/android-developers/JwZG-Tchlog/iaLxLqeGEnQJ
-    public static Bitmap getBitmapFromUri(Context context, Uri streamUri){
-        if (streamUri != null) {
-            ContentResolver cr = context.getContentResolver();
-            InputStream is;
+    public static Bitmap getBitmapFromUri(Context context, Uri streamUri) {
+        if (null == context || null == streamUri)
+            return null;
 
-            try {
-                is = cr.openInputStream(streamUri);
-                return BitmapFactory.decodeStream(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        ContentResolver cr = context.getContentResolver();
+        InputStream is;
+
+        try {
+            is = cr.openInputStream(streamUri);
+            return BitmapFactory.decodeStream(is);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 

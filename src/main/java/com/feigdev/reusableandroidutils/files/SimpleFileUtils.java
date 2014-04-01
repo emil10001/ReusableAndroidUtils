@@ -55,8 +55,6 @@ public class SimpleFileUtils {
 
     public static String writeRelative(String relativeFilename, byte[] data) {
         File relativeDir = getDir();
-        if (!relativeDir.exists())
-            relativeDir.mkdirs();
 
         if (!relativeDir.exists()) {
             Log.e(TAG, "Couldn't make directory");
@@ -70,8 +68,6 @@ public class SimpleFileUtils {
 
     public static String writeCache(Context context, String relativeFilename, byte[] data) {
         File relativeDir = getCacheDir(context);
-        if (!relativeDir.exists())
-            relativeDir.mkdirs();
 
         if (!relativeDir.exists()) {
             Log.e(TAG, "Couldn't make directory");
