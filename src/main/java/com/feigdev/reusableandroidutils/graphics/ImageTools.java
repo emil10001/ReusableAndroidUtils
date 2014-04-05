@@ -9,10 +9,7 @@ import android.net.Uri;
 import android.util.Log;
 import com.nbadal.gifencoder.AnimatedGifEncoder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -44,6 +41,10 @@ public class ImageTools {
             Log.d(TAG, "wrote file " + outGif);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        for (Bitmap bitmap : bitmaps){
+            bitmap.recycle();
         }
     }
 
@@ -100,6 +101,10 @@ public class ImageTools {
             return null;
         }
 
+        return shrinkBitmap(bmp);
+    }
+
+    public static Bitmap shrinkBitmap(Bitmap bmp) {
         if (null == bmp)
             return null;
 
@@ -118,8 +123,11 @@ public class ImageTools {
 
             Bitmap bmp2 = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, true);
 
-            if (null != bmp2 && (getBitmapSize(bmp) < getBitmapSize(bmp2)))
+            if (null != bmp2 && (getBitmapSize(bmp) < getBitmapSize(bmp2))) {
+                bmp.recycle();
                 bmp = bmp2;
+            } else
+                bmp2.recycle();
 
             Log.d(TAG, "generated image 2");
         } catch (OutOfMemoryError e) {
@@ -129,10 +137,6 @@ public class ImageTools {
         }
 
         return bmp;
-    }
-
-    public static Bitmap shrinkBitmap(Bitmap bmp) {
-        return shrinkBitmap(bitmapToByteArray(bmp));
     }
 
     public static byte[] shrinkBitmapToBytes(Bitmap bmp) {
@@ -146,9 +150,8 @@ public class ImageTools {
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            return byteArray;
-        } catch (Exception e){
+            return stream.toByteArray();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -156,7 +159,10 @@ public class ImageTools {
     }
 
     public static byte[] getImageBytesFromFile(String filename) {
-        return bitmapToByteArray(generatePic(filename));
+        Bitmap bmp = generatePic(filename);
+        byte[] bytes = bitmapToByteArray(bmp);
+        bmp.recycle();
+        return bytes;
     }
 
     public static int getBitmapSize(Bitmap data) {
@@ -181,4 +187,32 @@ public class ImageTools {
         return null;
     }
 
+    public static String getMimeType(String filename) {
+        return getMimeType(getImageBytesFromFile(filename));
+    }
+
+    public static String getMimeType(Bitmap bmp) {
+        return getMimeType(bitmapToByteArray(bmp));
+    }
+
+    // http://stackoverflow.com/a/19739471/974800
+    public static String getMimeType(byte[] data) {
+        if (null == data)
+            return null;
+
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeByteArray(data, 0, data.length, options);
+            String mime = options.outMimeType;
+            Log.d(TAG, "getMimeTypeOfBitmap: " + mime);
+            return mime;
+        } catch (OutOfMemoryError e) {
+            Log.w(TAG, "getMimeTypeOfBitmap OutOfMemoryError =(");
+        } catch (Exception e) {
+            Log.w(TAG, "getMimeTypeOfBitmap blew up =(");
+        }
+
+        return null;
+    }
 }
