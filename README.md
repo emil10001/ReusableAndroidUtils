@@ -6,4 +6,4 @@ This library does not provide a stable API. It is in development and is very sub
 
 ## About
 
-A small collection of Android utilities, packaged as an Android Library with Gradle support.
+A small collection of Android utilities, packaged as an Android Library with Gradle support. Depends on [ReusableJavaUtils](https://github.com/emil10001/ReusableJavaUtils).
