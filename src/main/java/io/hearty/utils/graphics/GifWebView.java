@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils.graphics;
+package io.hearty.utils.graphics;
 
 import android.content.Context;
 import android.net.Uri;

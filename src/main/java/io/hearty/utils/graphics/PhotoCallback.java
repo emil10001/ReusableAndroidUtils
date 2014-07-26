@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils.graphics;
+package io.hearty.utils.graphics;
 
 /**
  * Created by ejf3 on 3/8/14.

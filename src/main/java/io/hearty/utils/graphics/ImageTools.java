@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils.graphics;
+package io.hearty.utils.graphics;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.util.Log;
-import com.nbadal.gifencoder.AnimatedGifEncoder;
+import io.nbadal.gifencoder.AnimatedGifEncoder;
 
 import java.io.*;
 import java.util.ArrayList;

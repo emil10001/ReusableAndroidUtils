@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils.platform;
+package io.hearty.utils.platform;
 
 import android.os.Build;
 

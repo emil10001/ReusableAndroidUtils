@@ -1,9 +1,9 @@
-package com.feigdev.reusableandroidutils.graphics;
+package io.hearty.utils.graphics;
 
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.util.Log;
-import com.feigdev.reusableandroidutils.files.SimpleFileUtils;
+import io.hearty.utils.files.AndroidFileUtils;
 
 /**
  * http://www.vogella.com/tutorials/AndroidCamera/article.html
@@ -35,7 +35,7 @@ public class PhotoHandler implements Camera.PictureCallback {
 
             String photoFile = "Picture_" + System.currentTimeMillis() + ".jpg";
 
-            return SimpleFileUtils.writeRelative(photoFile, params[0]);
+            return AndroidFileUtils.writeRelative(photoFile, params[0]);
         }
 
         @Override

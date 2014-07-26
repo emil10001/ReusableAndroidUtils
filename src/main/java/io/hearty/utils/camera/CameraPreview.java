@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.glass.sample.camera;
+package io.hearty.utils.camera;
 
 import android.content.Context;
 import android.hardware.Camera;

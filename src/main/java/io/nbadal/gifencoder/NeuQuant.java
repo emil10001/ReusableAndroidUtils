@@ -1,4 +1,4 @@
-package com.nbadal.gifencoder;
+package io.nbadal.gifencoder;
 
 	/*
      * NeuQuant Neural-Net Quantization Algorithm

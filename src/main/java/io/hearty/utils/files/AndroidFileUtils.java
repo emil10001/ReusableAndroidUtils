@@ -1,4 +1,4 @@
-package com.feigdev.reusableandroidutils.files;
+package io.hearty.utils.files;
 
 import android.content.Context;
 import android.os.Environment;
@@ -9,7 +9,7 @@ import java.io.*;
 /**
  * Created by ejf3 on 3/9/14.
  */
-public class SimpleFileUtils {
+public class AndroidFileUtils extends SimpleFileUtils {
     private static final String TAG = "SimpleFileUtils";
 
     public static File getDir() {
@@ -39,20 +39,6 @@ public class SimpleFileUtils {
         return Environment.getExternalStorageDirectory().toString();
     }
 
-    public static String write(String filename, byte[] data) {
-        File pictureFile = new File(filename);
-
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(data);
-            fos.close();
-            Log.d(TAG, "New Image saved:" + filename);
-        } catch (Exception error) {
-            Log.e(TAG, "File" + filename + "not saved: ", error);
-        }
-        return filename;
-    }
-
     public static String writeRelative(String relativeFilename, byte[] data) {
         File relativeDir = getDir();
 
@@ -77,20 +63,6 @@ public class SimpleFileUtils {
         String filename = relativeDir.getPath() + File.separator + relativeFilename;
         write(filename,data);
         return filename;
-    }
-
-    public static void copy(String src, String dst) throws IOException {
-        InputStream in = new FileInputStream(src);
-        OutputStream out = new FileOutputStream(dst);
-
-        // Transfer bytes from in to out
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
     }
 
 }
