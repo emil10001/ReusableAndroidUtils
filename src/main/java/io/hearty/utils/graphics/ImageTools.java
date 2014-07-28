@@ -7,9 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.util.Log;
-import io.nbadal.gifencoder.AnimatedGifEncoder;
+import al.nbadal.gifencoder.AnimatedGifEncoder;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -43,7 +46,7 @@ public class ImageTools {
             e.printStackTrace();
         }
 
-        for (Bitmap bitmap : bitmaps){
+        for (Bitmap bitmap : bitmaps) {
             bitmap.recycle();
         }
     }

@@ -1,4 +1,4 @@
-package io.nbadal.gifencoder;
+package al.nbadal.gifencoder;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
