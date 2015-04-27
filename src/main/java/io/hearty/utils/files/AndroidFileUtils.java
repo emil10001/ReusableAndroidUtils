@@ -12,6 +12,14 @@ import java.io.*;
 public class AndroidFileUtils extends SimpleFileUtils {
     private static final String TAG = "SimpleFileUtils";
 
+    public static File getFileInDir(File dir, String filename) {
+        return new File(dir, filename);
+    }
+
+    public static File getFileInDefaultDir(String filename) {
+        return new File(getDir(), filename);
+    }
+
     public static File getDir() {
         String sdDir = Environment.getExternalStorageDirectory().toString();
         File relativeDir = new File(sdDir, "FeigdevUtils");
